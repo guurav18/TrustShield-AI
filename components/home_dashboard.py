@@ -69,10 +69,23 @@ def render_home_dashboard():
             <div style="text-align: right;">
                 <div style="font-size: 11px; color: #64748B; font-weight: bold; text-transform: uppercase;">GLOBAL DEFENSE STATUS</div>
                 <div style="font-size: 22px; font-weight: 900; color: #22C55E; margin-top: 2px;">DEFCON 1 — OPTIMAL</div>
-                <div style="font-size: 12px; color: #00F2FE; font-weight: bold; margin-top: 4px;">🕒 {full_date_str}</div>
+                <div style="font-size: 12px; color: #00F2FE; font-weight: bold; margin-top: 4px;">
+                    🕒 <span id="dash-live-clock">Loading...</span>
+                </div>
             </div>
         </div>
     </div>
+    <script>
+    function tickDashClock() {
+        const now = new Date();
+        const str = now.toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' }) + ' | ' + now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+        const el = document.getElementById('dash-live-clock');
+        if (el) el.innerText = str;
+    }
+    setInterval(tickDashClock, 1000);
+    tickDashClock();
+    </script>
+
     """, unsafe_allow_html=True)
 
 
