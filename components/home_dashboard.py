@@ -119,28 +119,28 @@ def render_home_dashboard():
     st.subheader("🛡️ Multi-Modal AI Defense Infrastructure (5 Core Modalities)")
     st.markdown("""
     <div style="background: rgba(15, 23, 42, 0.85); border: 2px solid rgba(0, 242, 254, 0.35); border-radius: 18px; padding: 22px; margin-bottom: 28px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);">
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px;">
-            <div style="background: rgba(30, 41, 59, 0.6); padding: 14px; border-radius: 12px; border-top: 3px solid #00F2FE;">
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 14px;">
+            <div style="flex: 1 1 220px; max-width: 270px; background: rgba(30, 41, 59, 0.6); padding: 14px; border-radius: 12px; border-top: 3px solid #00F2FE;">
                 <div style="font-size: 11px; color: #00F2FE; font-weight: 900; letter-spacing: 0.8px;">1. VISUAL MODALITY</div>
                 <div style="font-size: 14px; font-weight: 800; color: #F8FAFC; margin-top: 4px;">Face Crop + CNN</div>
                 <div style="font-size: 11px; color: #94A3B8; margin-top: 4px;">OpenCV Haar Cascade + MobileNetV2 spatial feature extraction.</div>
             </div>
-            <div style="background: rgba(30, 41, 59, 0.6); padding: 14px; border-radius: 12px; border-top: 3px solid #38BDF8;">
+            <div style="flex: 1 1 220px; max-width: 270px; background: rgba(30, 41, 59, 0.6); padding: 14px; border-radius: 12px; border-top: 3px solid #38BDF8;">
                 <div style="font-size: 11px; color: #38BDF8; font-weight: 900; letter-spacing: 0.8px;">2. TEMPORAL MODALITY</div>
                 <div style="font-size: 14px; font-weight: 800; color: #F8FAFC; margin-top: 4px;">Video Sequence AI</div>
                 <div style="font-size: 11px; color: #94A3B8; margin-top: 4px;">Frame-to-frame temporal motion & flickering inspection.</div>
             </div>
-            <div style="background: rgba(30, 41, 59, 0.6); padding: 14px; border-radius: 12px; border-top: 3px solid #C084FC;">
+            <div style="flex: 1 1 220px; max-width: 270px; background: rgba(30, 41, 59, 0.6); padding: 14px; border-radius: 12px; border-top: 3px solid #C084FC;">
                 <div style="font-size: 11px; color: #C084FC; font-weight: 900; letter-spacing: 0.8px;">3. AUDIO MODALITY</div>
                 <div style="font-size: 14px; font-weight: 800; color: #F8FAFC; margin-top: 4px;">Mel-Spectrogram AI</div>
                 <div style="font-size: 11px; color: #94A3B8; margin-top: 4px;">Voice cloning & ElevenLabs acoustic spoof detection.</div>
             </div>
-            <div style="background: rgba(30, 41, 59, 0.6); padding: 14px; border-radius: 12px; border-top: 3px solid #22C55E;">
+            <div style="flex: 1 1 220px; max-width: 270px; background: rgba(30, 41, 59, 0.6); padding: 14px; border-radius: 12px; border-top: 3px solid #22C55E;">
                 <div style="font-size: 11px; color: #22C55E; font-weight: 900; letter-spacing: 0.8px;">4. TEXT MODALITY</div>
                 <div style="font-size: 14px; font-weight: 800; color: #F8FAFC; margin-top: 4px;">NLP Phishing Engine</div>
                 <div style="font-size: 11px; color: #94A3B8; margin-top: 4px;">WhatsApp SMS scam & malicious link intent analysis.</div>
             </div>
-            <div style="background: rgba(30, 41, 59, 0.6); padding: 14px; border-radius: 12px; border-top: 3px solid #F59E0B;">
+            <div style="flex: 1 1 220px; max-width: 270px; background: rgba(30, 41, 59, 0.6); padding: 14px; border-radius: 12px; border-top: 3px solid #F59E0B;">
                 <div style="font-size: 11px; color: #F59E0B; font-weight: 900; letter-spacing: 0.8px;">5. CRYPTO MODALITY</div>
                 <div style="font-size: 14px; font-weight: 800; color: #F8FAFC; margin-top: 4px;">SHA-256 / Sec 65B</div>
                 <div style="font-size: 11px; color: #94A3B8; margin-top: 4px;">Court-admissible digital hash certificates & C2PA audit trails.</div>
@@ -148,6 +148,7 @@ def render_home_dashboard():
         </div>
     </div>
     """, unsafe_allow_html=True)
+
 
     # 3. Interactive Analytics Charts
     c1, c2 = st.columns([1.6, 1])
