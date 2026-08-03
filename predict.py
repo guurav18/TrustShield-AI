@@ -40,13 +40,29 @@ class DeepfakeDetector:
         try:
             self.model = keras.models.load_model(model_path)
             print(f"[OK] Model loaded from: {model_path}")
+            # Infer input shape if available
+            if hasattr(self.model, 'input_shape') and self.model.input_shape and len(self.model.input_shape) == 4:
+                h, w = self.model.input_shape[1], self.model.input_shape[2]
+                if h is not None and w is not None:
+                    self.target_size = (h, w)
+                else:
+                    self.target_size = (224, 224)
+            else:
+                self.target_size = (224, 224)
         except Exception as e:
             print(f"[WARNING] Failed to load model: {str(e)}. Falling back to Demo Mode.")
             self.is_demo = True
+            self.target_size = (224, 224)
     
     def predict_frame(self, frame):
         """
         Predict on a single frame.
+        
+        Args:
+            frame (np.ndarray): Single frame with shape (height, width, 3) and values in [0, 1]
+        
+        Returns:
+            float: Prediction confidence (0 = Real, 1 = Fake)
         """
         if self.is_demo or self.model is None:
             return float(np.random.uniform(0.1, 0.85))
@@ -54,28 +70,16 @@ class DeepfakeDetector:
         frame = np.expand_dims(frame, axis=0)
         prediction = self.model.predict(frame, verbose=0)
         return float(prediction[0][0])
-        """
-        Predict on a single frame.
-        
-        Args:
-            frame (np.ndarray): Single frame with shape (128, 128, 3) and values in [0, 1]
-        
-        Returns:
-            float: Prediction confidence (0 = Real, 1 = Fake)
-        """
-        # Add batch dimension: (128, 128, 3) -> (1, 128, 128, 3)
-        frame = np.expand_dims(frame, axis=0)
-        prediction = self.model.predict(frame, verbose=0)
-        return float(prediction[0][0])
+
     
-    def predict_video(self, video_path, num_frames=10, target_size=(128, 128)):
+    def predict_video(self, video_path, num_frames=10, target_size=None):
         """
         Predict deepfake likelihood for entire video.
         
         Args:
             video_path (str): Path to video file
             num_frames (int): Number of frames to extract from video
-            target_size (tuple): Frame size (height, width)
+            target_size (tuple, optional): Frame size (height, width)
         
         Returns:
             dict: {
@@ -87,6 +91,9 @@ class DeepfakeDetector:
             }
             Returns None if video processing fails
         """
+        if target_size is None:
+            target_size = getattr(self, 'target_size', (224, 224))
+
         try:
             if self.is_demo:
                 frame_preds = [float(np.random.uniform(0.15, 0.85)) for _ in range(num_frames)]
@@ -101,8 +108,9 @@ class DeepfakeDetector:
                     'frame_predictions': frame_preds
                 }
 
-            # Extract frames from video
-            frames = extract_frames(video_path, num_frames=num_frames, target_size=target_size)
+            # Extract frames from video with face cropping enabled
+            frames = extract_frames(video_path, num_frames=num_frames, target_size=target_size, enable_face_crop=True)
+
             
             if frames is None or len(frames) == 0:
                 # Demo fallback

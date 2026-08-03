@@ -14,14 +14,73 @@ import os
 from pathlib import Path
 
 
-def extract_frames(video_path, num_frames=10, target_size=(128, 128)):
+# Lazy load face detector cascade
+FACE_CASCADE = None
+
+def get_face_cascade():
+    global FACE_CASCADE
+    if FACE_CASCADE is None and HAS_CV2:
+        try:
+            cascade_path = cv2.data.haarcascades + 'haarcascade_frontalface_default.xml'
+            FACE_CASCADE = cv2.CascadeClassifier(cascade_path)
+        except Exception:
+            FACE_CASCADE = None
+    return FACE_CASCADE
+
+
+def crop_face(frame, padding=0.2, target_size=(224, 224)):
     """
-    Extract frames from a video file.
+    Detect face in frame, add padding, crop, and resize to target_size.
+    Falls back to center square crop if no face is detected.
+    """
+    if frame is None:
+        return None
+        
+    h, w, _ = frame.shape
+    cascade = get_face_cascade()
+    
+    if cascade is not None:
+        try:
+            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+            faces = cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=4, minSize=(40, 40))
+            
+            if len(faces) > 0:
+                # Find largest face by area
+                largest_face = max(faces, key=lambda rect: rect[2] * rect[3])
+                fx, fy, fw, fh = largest_face
+                
+                # Add padding
+                pad_w = int(fw * padding)
+                pad_h = int(fh * padding)
+                
+                x1 = max(0, fx - pad_w)
+                y1 = max(0, fy - pad_h)
+                x2 = min(w, fx + fw + pad_w)
+                y2 = min(h, fy + fh + pad_h)
+                
+                face_crop = frame[y1:y2, x1:x2]
+                if face_crop.size > 0:
+                    return cv2.resize(face_crop, (target_size[1], target_size[0]))
+        except Exception:
+            pass
+            
+    # Fallback: Center crop (square)
+    min_dim = min(h, w)
+    start_x = (w - min_dim) // 2
+    start_y = (h - min_dim) // 2
+    crop = frame[start_y:start_y + min_dim, start_x:start_x + min_dim]
+    return cv2.resize(crop, (target_size[1], target_size[0]))
+
+
+def extract_frames(video_path, num_frames=10, target_size=(224, 224), enable_face_crop=True):
+    """
+    Extract frames from a video file with optional face cropping.
     
     Args:
         video_path (str): Path to video file
         num_frames (int): Number of frames to extract (evenly spaced)
         target_size (tuple): Size to resize frames to (height, width)
+        enable_face_crop (bool): Whether to perform OpenCV face detection & cropping
     
     Returns:
         np.ndarray: Array of extracted frames with shape (num_frames, height, width, 3)
@@ -55,9 +114,13 @@ def extract_frames(video_path, num_frames=10, target_size=(128, 128)):
             ret, frame = cap.read()
             
             if ret:
-                # Resize frame
-                frame = cv2.resize(frame, (target_size[1], target_size[0]))
-                frames.append(frame)
+                if enable_face_crop:
+                    processed_frame = crop_face(frame, padding=0.2, target_size=target_size)
+                else:
+                    processed_frame = cv2.resize(frame, (target_size[1], target_size[0]))
+                
+                if processed_frame is not None:
+                    frames.append(processed_frame)
         
         cap.release()
         
@@ -213,7 +276,7 @@ def load_faceforensics_dataset(dataset_path, num_frames=10, target_size=(128, 12
                     print(f"  Processed {i + 1} real videos...")
     
     # FAKE videos from multiple deepfake folders (label = 1)
-    fake_folders = ['Deepfakes', 'Face2Face', 'FaceShifter', 'FaceSwap', 'NeuralTextures']
+    fake_folders = ['Deepfakes', 'Face2Face', 'FaceShifter', 'FaceSwap', 'NeuralTextures', 'DeepFakeDetection']
     
     for folder_name in fake_folders:
         fake_path = dataset_path / folder_name
@@ -231,7 +294,7 @@ def load_faceforensics_dataset(dataset_path, num_frames=10, target_size=(128, 12
                     if (i + 1) % 5 == 0:
                         print(f"  Processed {i + 1} deepfake videos from {folder_name}...")
     
-    print(f"\n✓ Total videos loaded: {len(frames_list)}")
+    print(f"\n[OK] Total videos loaded: {len(frames_list)}")
     
     if len(frames_list) == 0:
         print("No videos found in FaceForensics dataset!")

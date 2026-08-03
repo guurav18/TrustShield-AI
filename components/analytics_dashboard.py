@@ -79,7 +79,7 @@ def render_analytics_dashboard():
         
     st.markdown("---")
     
-    st.subheader("🎭 Attack Framework Distribution Breakdown")
+    st.subheader("🛡️ Attack Framework Distribution Breakdown")
     df_bar = pd.DataFrame({
         "Generative Framework": ["DeepFaceLab", "FaceSwap", "FaceFusion", "HeyGen / ElevenLabs", "Runway Gen-2", "OpenAI Sora", "SadTalker"],
         "Detected Attacks": [542, 380, 210, 145, 98, 45, 30]

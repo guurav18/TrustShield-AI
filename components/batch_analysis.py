@@ -24,7 +24,7 @@ def render_batch_analysis(detector):
     )
     
     if batch_files:
-        if st.button("🚀 Launch Parallel Batch Audit Queue", use_container_width=True):
+        if st.button("⚡ Launch Parallel Batch Audit Queue", use_container_width=True):
             batch_results = []
             progress_bar = st.progress(0)
             status_text = st.empty()
@@ -74,11 +74,11 @@ def render_batch_analysis(detector):
             
             st.markdown("---")
             st.download_button(
-                label="📥 Export Enterprise Audit Summary (CSV)",
+                label="📜 Export Enterprise Audit Summary (CSV)",
                 data=df_b.to_csv(index=False),
                 file_name=f"TrustShield_Batch_Audit_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
                 mime="text/csv",
                 use_container_width=True
             )
     else:
-        st.info("👆 Drop multiple video files above to initiate bulk enterprise auditing.")
+        st.info("ℹ️ Drop multiple video files above to initiate bulk enterprise auditing.")

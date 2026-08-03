@@ -15,7 +15,7 @@ def render_reports_page():
     st.subheader("📜 Digital Forensic Reports & Cryptographic Evidence")
     st.caption("Generate and verify tamper-evident evidence certificates compliant with ISO 27037 / C2PA standards.")
     
-    tab_r1, tab_r2 = st.tabs(["📝 Sample Evidence Case Report", "🔑 Certificate Hash Verifier"])
+    tab_r1, tab_r2 = st.tabs(["📜 Sample Evidence Case Report", "🔒 Certificate Hash Verifier"])
     
     with tab_r1:
         st.markdown("Generate a sample forensic report for investigation files.")
@@ -35,7 +35,7 @@ def render_reports_page():
         html_rep = generate_forensic_html_report(cert, findings, attacks)
         
         st.download_button(
-            label="📥 Download Evidence-Ready Forensic HTML Report",
+            label="📜 Download Evidence-Ready Forensic HTML Report",
             data=html_rep,
             file_name=f"TrustShield_Audit_{cert['certificate_id']}.html",
             mime="text/html",
@@ -43,9 +43,9 @@ def render_reports_page():
         )
         
     with tab_r2:
-        st.markdown("### 🔑 Cryptographic Hash & Digital Signature Verifier")
+        st.markdown("### 🔒 Cryptographic Hash & Digital Signature Verifier")
         input_sig = st.text_input("Enter Digital Certificate Signature Hash to verify:")
-        if st.button("🔍 Verify Signature Authenticity"):
+        if st.button("🔍 Verify Signature Authenticity", use_container_width=True):
             if input_sig:
                 st.success("✅ SIGNATURE VERIFIED: Evidence record matches TrustShield AI C2PA Immutable Ledger.")
             else:

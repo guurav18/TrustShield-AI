@@ -16,7 +16,7 @@ def render_events_timeline(is_fake: bool) -> int:
             {"time": "00:04", "frame": 4, "title": "Eye Blink Anomaly", "desc": "Fixed rPPG pulse & non-natural eye closure duration", "type": "WARNING", "icon": "👁️"},
             {"time": "00:08", "frame": 8, "title": "Lip Synchronization Offset", "desc": "Phoneme-viseme delay of +80ms detected", "type": "DANGER", "icon": "👄"},
             {"time": "00:13", "frame": 13, "title": "GAN Grid Artifact Peak", "desc": "High-frequency spatial noise grid detected on cheek region", "type": "DANGER", "icon": "⚡"},
-            {"time": "00:17", "frame": 15, "title": "Facial Boundary Texture Noise", "desc": "Warping blur along jawline border seam", "type": "DANGER", "icon": "🔍"}
+            {"time": "00:17", "frame": 15, "title": "Facial Boundary Texture Noise", "desc": "Warping blur along jawline border seam", "type": "DANGER", "icon": "🎭"}
         ]
     else:
         events = [

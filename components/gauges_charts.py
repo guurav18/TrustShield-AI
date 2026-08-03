@@ -13,19 +13,14 @@ def render_trust_gauge(trust_score: float) -> go.Figure:
     # Color logic
     if trust_score >= 80:
         bar_color = "#22C55E"
-        auth_rating = "VERY HIGH"
     elif trust_score >= 60:
         bar_color = "#EAB308"
-        auth_rating = "HIGH"
     elif trust_score >= 40:
         bar_color = "#F59E0B"
-        auth_rating = "MEDIUM"
     elif trust_score >= 20:
         bar_color = "#F97316"
-        auth_rating = "LOW"
     else:
         bar_color = "#EF4444"
-        auth_rating = "CRITICAL"
 
     fig = go.Figure(go.Indicator(
         mode="gauge+number",
@@ -81,13 +76,11 @@ def render_threat_badge(is_fake: bool, trust_score: float) -> tuple:
         bg = "rgba(239, 68, 68, 0.2)"
         border = "#EF4444"
 
-    badge_html = f"""
-    <div style="background: {bg}; border: 1px solid {border}; padding: 16px; border-radius: 12px; text-align: center; margin-top: 10px;">
-        <div style="font-size: 11px; color: #94A3B8; font-weight: bold; text-transform: uppercase;">THREAT LEVEL</div>
-        <div style="font-size: 26px; font-weight: 900; color: {color}; margin-top: 4px;">{level}</div>
-        <div style="font-size: 12px; color: #E2E8F0; margin-top: 2px;">Authenticity Rating: <b>{rating}</b></div>
-    </div>
-    """
+    badge_html = f"""<div style="background: {bg}; border: 1px solid {border}; padding: 16px; border-radius: 12px; text-align: center; margin-top: 10px;">
+<div style="font-size: 11px; color: #94A3B8; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">THREAT LEVEL</div>
+<div style="font-size: 26px; font-weight: 900; color: {color}; margin-top: 4px;">{level}</div>
+<div style="font-size: 12px; color: #E2E8F0; margin-top: 2px;">Authenticity Rating: <b>{rating}</b></div>
+</div>"""
     return badge_html, level
 
 

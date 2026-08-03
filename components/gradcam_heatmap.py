@@ -11,7 +11,7 @@ from forensics.forensic_engine import generate_gradcam_overlay
 
 def render_gradcam_section(video_path: str, is_fake: bool, current_frame_idx: int = 1):
     """Render frame heatmap visualizer and Explainable AI breakdown."""
-    st.subheader("👁️ Explainable AI & GradCAM Visualizer")
+    st.subheader("🔬 Explainable AI & GradCAM Visualizer")
     st.caption("Neural attention maps highlighting spatial anomalies across key facial landmarks.")
     
     frame_orig = np.zeros((240, 240, 3), dtype=np.uint8)
@@ -57,14 +57,14 @@ def render_gradcam_section(video_path: str, is_fake: bool, current_frame_idx: in
             st.markdown("""
             - 👄 **Lips & Perioral Region:** `34.2%` contribution to fake score (Asynchronous phoneme mouth warp)
             - 👁️ **Eye & Periocular Region:** `28.6%` contribution (Abnormal rPPG pulse & fixed blink pattern)
-            - 📐 **Jawline & Face Boundary:** `24.1%` contribution (Boundary edge blending blur)
+            - 🎭 **Jawline & Face Boundary:** `24.1%` contribution (Boundary edge blending blur)
             - 💡 **Photometric Lighting:** `13.1%` contribution (Specular shadow mismatch)
             """)
         else:
             st.markdown("""
             - 👄 **Lips & Perioral Region:** `4.1%` anomaly score (Natural lip synchrony)
             - 👁️ **Eye & Periocular Region:** `3.2%` anomaly score (Organic blink micro-movements)
-            - 📐 **Jawline & Face Boundary:** `2.8%` anomaly score (Natural skin texture continuity)
+            - 🎭 **Jawline & Face Boundary:** `2.8%` anomaly score (Natural skin texture continuity)
             - 💡 **Photometric Lighting:** `1.9%` anomaly score (Consistent illumination vector)
             """)
             

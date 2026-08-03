@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 TrustShield AI - Enterprise Multi-Modal Deepfake Forensic Intelligence Platform
 Main Entry Point
@@ -7,10 +8,27 @@ import streamlit as st
 import os
 from predict import DeepfakeDetector
 
+# Emoji constants (unicode escapes - immune to encoding issues)
+# Emoji constants (unicode escapes - immune to encoding issues)
+SHIELD  = "\U0001F6E1\uFE0F"   # 🛡️
+CHART   = "\U0001F4CA"         # 📊
+MICRO   = "\U0001F52C"         # 🔬
+BOX     = "\U0001F4E6"         # 📦
+BRAIN   = "\U0001F9E0"         # 🧠
+TREND   = "\U0001F4C8"         # 📈
+SCROLL  = "\U0001F4DC"         # 📜
+BOLT    = "\u26A1"             # ⚡
+GEAR    = "\u2699\uFE0F"       # ⚙️
+LOCK    = "\U0001F512"         # 🔒
+HEART   = "\u2764\uFE0F"       # ❤️
+CAM     = "\U0001F3A5"         # 🎥
+CHECK   = "\u2705"             # ✅
+GRAD    = "\U0001F393"         # 🎓
+
 # Page configuration
 st.set_page_config(
     page_title="TrustShield AI - Enterprise Multi-Modal Deepfake Intelligence Platform",
-    page_icon="🛡️",
+    page_icon=SHIELD,
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -32,7 +50,7 @@ def load_detector():
     try:
         detector = DeepfakeDetector(model_path if has_model_file else None)
         return detector
-    except Exception as e:
+    except Exception:
         return DeepfakeDetector(None)
 
 detector = load_detector()
@@ -40,8 +58,10 @@ detector = load_detector()
 # Import Modular View Components
 from components.sidebar import render_sidebar
 from components.hero import render_hero
+from components.home_dashboard import render_home_dashboard
 from components.single_inspector import render_single_inspector
 from components.batch_analysis import render_batch_analysis
+from components.cyber_awareness import render_cyber_awareness
 from components.analytics_dashboard import render_analytics_dashboard
 from components.threat_intelligence import render_threat_intelligence
 from components.future_modules import render_future_modules
@@ -50,28 +70,30 @@ from components.report_certificate import render_reports_page
 # Render Sidebar & Capture View Choice
 view_choice = render_sidebar()
 
-# Main Router
-if view_choice == "📊 Home Dashboard":
+# Main Router — must match sidebar option strings exactly
+if view_choice == f"{CHART} Home Dashboard":
+    render_home_dashboard()
+elif view_choice == f"{MICRO} Video Inspector":
     render_hero()
     render_single_inspector(detector)
-elif view_choice == "🔬 Video Inspector":
-    render_hero()
-    render_single_inspector(detector)
-elif view_choice == "📦 Batch Analysis":
+elif view_choice == f"{BOX} Batch Analysis":
     render_batch_analysis(detector)
-elif view_choice == "🛡️ Live Camera":
-    st.markdown("## 🛡️ Live Camera Shield Simulator")
+elif view_choice == f"{GRAD} Awareness & Privacy Hub":
+    render_cyber_awareness()
+
+elif view_choice == f"{CAM} Live Camera":
+    st.markdown(f"## {CAM} Live Camera Shield Simulator")
     render_future_modules()
-elif view_choice == "🧠 Threat Intelligence":
+elif view_choice == f"{BRAIN} Threat Intelligence":
     render_threat_intelligence()
-elif view_choice == "📈 Analytics & Trends":
+elif view_choice == f"{TREND} Analytics & Trends":
     render_analytics_dashboard()
-elif view_choice == "📜 Reports & Certificates":
+elif view_choice == f"{SCROLL} Reports & Certificates":
     render_reports_page()
-elif view_choice == "⚡ Future Modules":
+elif view_choice == f"{BOLT} Future Modules":
     render_future_modules()
-elif view_choice == "⚙️ Settings & Telemetry":
-    st.subheader("⚙️ Enterprise System Settings & Telemetry")
+elif view_choice == f"{GEAR} Settings & Telemetry":
+    st.subheader(f"{GEAR} Enterprise System Settings & Telemetry")
     st.markdown("""
     - **Engine Architecture:** Multi-Modal Spatial-Temporal CNN-LSTM
     - **GradCAM Module:** Active Attention Map Overlay Engine
@@ -79,13 +101,13 @@ elif view_choice == "⚙️ Settings & Telemetry":
     - **Model Checkpoint:** `models/deepfake_model.h5`
     - **Python Environment:** PyTorch / TensorFlow Hybrid Core
     """)
-    st.success("✅ TrustShield AI System Operating Normally.")
+    st.success(f"{CHECK} TrustShield AI System Operating Normally.")
 
 # Footer
 st.markdown("---")
-st.markdown("""
+st.markdown(f"""
 <div style="text-align: center; color: #64748B; font-size: 13px; margin-top: 20px;">
-    <p><b>TrustShield AI Enterprise Platform v3.4</b> | Built by <b>Gaurav Gupta</b> 🙌❤️</p>
-    <p>🔒 Privacy-First Architecture | Local SHA-256 Evidence Hashing | ISO 27037 & C2PA Specification Compliant</p>
+    <p><b>TrustShield AI Enterprise Platform v3.4</b> | Built by <b>Gaurav Gupta</b> {SHIELD}{HEART}</p>
+    <p>{LOCK} Privacy-First Architecture &nbsp;|&nbsp; Local SHA-256 Evidence Hashing &nbsp;|&nbsp; ISO 27037 &amp; C2PA Specification Compliant</p>
 </div>
 """, unsafe_allow_html=True)

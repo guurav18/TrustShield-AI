@@ -37,7 +37,7 @@ def render_findings_and_multimodal(ai_findings: list, multimodal_cards: list, at
             """, unsafe_allow_html=True)
             
     with col_multi:
-        st.subheader("🌐 Multi-Modal Sensor Status")
+        st.subheader("📊 Multi-Modal Sensor Status")
         st.caption("State monitoring across 6 independent verification engines.")
         
         for card in multimodal_cards:
@@ -57,7 +57,7 @@ def render_findings_and_multimodal(ai_findings: list, multimodal_cards: list, at
     st.markdown("---")
     
     # Attack Classification Probabilities
-    st.subheader("🎭 Attack Vector Classification")
+    st.subheader("⚡ Attack Vector Classification")
     st.caption("Machine learning identification of the generative framework used to synthesize media.")
     
     col_at1, col_at2 = st.columns([1.2, 0.8])

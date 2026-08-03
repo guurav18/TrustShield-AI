@@ -58,7 +58,7 @@ def render_future_modules():
     with col_m5:
         st.markdown("""
         <div class="glass-panel" style="text-align: center;">
-            <div style="font-size: 36px;">𝕏</div>
+            <div style="font-size: 36px;">🐦</div>
             <h3 style="color: #F8FAFC; margin-top: 8px;">X (Twitter) Scan</h3>
             <p style="font-size: 12px; color: #94A3B8;">Real-time feed monitoring for viral misinformation and political figure deepfake clips.</p>
             <div style="background: rgba(248, 250, 252, 0.15); color: #F8FAFC; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: bold; display: inline-block;">PLANNED</div>
@@ -68,7 +68,7 @@ def render_future_modules():
     with col_m6:
         st.markdown("""
         <div class="glass-panel" style="text-align: center;">
-            <div style="font-size: 36px;">🧩</div>
+            <div style="font-size: 36px;">🌐</div>
             <h3 style="color: #00F2FE; margin-top: 8px;">REST API & Browser Ext</h3>
             <p style="font-size: 12px; color: #94A3B8;">Enterprise REST API endpoint (`POST /v3/analyze`) & Chrome extension for inline web page scanning.</p>
             <div style="background: rgba(0, 242, 254, 0.15); color: #00F2FE; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: bold; display: inline-block;">ENTERPRISE API ACTIVE</div>

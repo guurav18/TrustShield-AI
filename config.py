@@ -17,16 +17,23 @@ TRAINING_HISTORY_PATH = "training_history.png"
 # Number of frames to extract per video
 FRAMES_PER_VIDEO = 10
 
-# Target frame size (will be resized to this)
-FRAME_HEIGHT = 128
-FRAME_WIDTH = 128
+# Target frame size (224x224 for Transfer Learning models, 128x128 for lightweight CNN)
+FRAME_HEIGHT = 224
+FRAME_WIDTH = 224
+
+# Face Detection & Region Cropping
+ENABLE_FACE_CROPPING = True
 
 
 # ============================================================
 # MODEL SETTINGS
 # ============================================================
+# Model Backbone Type: 'efficientnet', 'mobilenet', or 'custom_cnn'
+MODEL_BACKBONE = "efficientnet"
+
 # Use lightweight model (faster but potentially less accurate)
 USE_LIGHT_MODEL = False
+
 
 # CNN Architecture parameters (only if building custom model)
 CONV_LAYERS = [

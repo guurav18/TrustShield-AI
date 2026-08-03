@@ -35,7 +35,7 @@ def render_single_inspector(detector):
         st.caption("Supported formats: **MP4, AVI, MOV, MKV** (Max file size: 500MB)")
         
     with col_info:
-        st.subheader("📋 Inspection Configuration")
+        st.subheader("⚙️ Inspection Configuration")
         sensitivity = st.session_state.get('sensitivity', 0.50)
         density = st.session_state.get('frame_density', 15)
         
@@ -51,7 +51,7 @@ def render_single_inspector(detector):
     st.markdown("---")
     
     if uploaded_file is not None:
-        if st.button("🚀 Execute Forensic Neural Scan", key="btn_run_inspector", use_container_width=True):
+        if st.button("⚡ Execute Forensic Neural Scan", key="btn_run_inspector", use_container_width=True):
             
             with tempfile.NamedTemporaryFile(delete=False, suffix='.mp4') as tmp:
                 tmp.write(uploaded_file.getbuffer())
@@ -69,14 +69,14 @@ def render_single_inspector(detector):
                 
                 for idx, step_name in enumerate(PIPELINE_STEPS):
                     for prev_i in range(idx):
-                        pipeline_placeholders[prev_i].markdown(f"<div class='pipeline-step done'>✓ {PIPELINE_STEPS[prev_i]}</div>", unsafe_allow_html=True)
+                        pipeline_placeholders[prev_i].markdown(f"<div class='pipeline-step done'>✅ {PIPELINE_STEPS[prev_i]}</div>", unsafe_allow_html=True)
                         
                     pipeline_placeholders[idx].markdown(f"<div class='pipeline-step active'>⏳ Running {step_name}...</div>", unsafe_allow_html=True)
                     progress_bar.progress(int(((idx + 1) / len(PIPELINE_STEPS)) * 100))
                     time.sleep(0.12)
                     
                 for final_i in range(len(PIPELINE_STEPS)):
-                    pipeline_placeholders[final_i].markdown(f"<div class='pipeline-step done'>✓ {PIPELINE_STEPS[final_i]} Completed</div>", unsafe_allow_html=True)
+                    pipeline_placeholders[final_i].markdown(f"<div class='pipeline-step done'>✅ {PIPELINE_STEPS[final_i]} Completed</div>", unsafe_allow_html=True)
                 
                 res = detector.predict_video(tmp_path, num_frames=density)
                 st.success("✅ Multi-Modal Forensic Analysis Completed Successfully!")
@@ -161,7 +161,7 @@ def render_single_inspector(detector):
                     c_d1, c_d2 = st.columns(2)
                     with c_d1:
                         st.download_button(
-                            label="📥 Download Evidence-Ready Forensic Report (HTML/PDF)",
+                            label="📜 Download Evidence-Ready Forensic Report (HTML/PDF)",
                             data=report_html,
                             file_name=f"TrustShield_Forensic_Report_{cert_dict['certificate_id']}.html",
                             mime="text/html",
@@ -170,7 +170,7 @@ def render_single_inspector(detector):
                     with c_d2:
                         import json
                         st.download_button(
-                            label="🔐 Download Cryptographic C2PA Certificate (JSON)",
+                            label="📜 Download Cryptographic C2PA Certificate (JSON)",
                             data=json.dumps(cert_dict, indent=2),
                             file_name=f"TrustShield_Certificate_{cert_dict['certificate_id']}.json",
                             mime="application/json",
