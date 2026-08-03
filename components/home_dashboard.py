@@ -22,6 +22,9 @@ CHECK   = "✅"
 import datetime
 
 
+from components.mascot import render_mascot_widget
+
+
 def render_home_dashboard():
     """Render Executive Command Center Home Dashboard."""
     
@@ -75,6 +78,10 @@ def render_home_dashboard():
         </div>
     </div>
     """, unsafe_allow_html=True)
+
+    # 1.5 3D Animated Cyber Mascot ShieldBot Widget
+    render_mascot_widget()
+
 
 
 
