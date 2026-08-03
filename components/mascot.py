@@ -60,9 +60,9 @@ def render_mascot_widget():
                 👋 <b>Hello! I'm TrustShield!</b><br>
                 Welcome! I'm scanning all media for AI deepfakes and face swaps in real-time. Stay safe!
             </div>
-
         </div>
     </div>
+
 
     <script>
     setTimeout(function() {
