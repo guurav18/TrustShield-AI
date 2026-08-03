@@ -16,10 +16,11 @@ SCROLL = "📜"
 BOLT   = "⚡"
 GEAR   = "⚙️"
 PC     = "💻"
-CAM    = "🎥"
-GRAD   = "🎓"
-MIC    = "🎙️"
-POLICE = "🚓"
+CAM    = "\U0001F3A5"
+GRAD   = "\U0001F393"
+MIC    = "\U0001F399\uFE0F"
+POLICE = "\U0001F693"
+
 
 
 def render_sidebar() -> str:
