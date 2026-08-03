@@ -56,7 +56,16 @@ def render_sidebar() -> str:
 
 
 
+        # Officer Identity Clearance Input
+        user_name = st.sidebar.text_input(
+            "👤 Officer Call-Sign / Name:",
+            value=st.session_state.get("user_name", "Security Officer"),
+            key="user_name_input"
+        )
+        st.session_state["user_name"] = user_name
+
         st.markdown("<div style='margin-bottom: 8px;'></div>", unsafe_allow_html=True)
+
 
         # Navigation Radio (options must remain 100% identical to maintain full app routing)
         nav_option = st.radio(

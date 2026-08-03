@@ -19,10 +19,24 @@ TREND   = "📈"
 CHECK   = "✅"
 
 
+import datetime
+
+
 def render_home_dashboard():
     """Render Executive Command Center Home Dashboard."""
     
-    # 1. Executive Banner
+    # Calculate time of day greeting
+    current_hour = datetime.datetime.now().hour
+    if current_hour < 12:
+        greeting = "Good Morning"
+    elif current_hour < 17:
+        greeting = "Good Afternoon"
+    else:
+        greeting = "Good Evening"
+        
+    user_name = st.session_state.get("user_name", "Security Officer")
+    
+    # 1. Executive Banner with Dynamic Welcome Greeting
     st.markdown(f"""
     <div style="
         background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.9) 50%, rgba(30, 27, 75, 0.95) 100%);
@@ -36,18 +50,18 @@ def render_home_dashboard():
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
             <div>
                 <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-                    <span style="background: rgba(34, 197, 94, 0.15); color: #22C55E; border: 1px solid rgba(34, 197, 94, 0.4); padding: 4px 14px; border-radius: 20px; font-size: 11px; font-weight: 800; letter-spacing: 1px;">
-                        SYSTEM OPERATIONAL
+                    <span style="background: rgba(0, 242, 254, 0.15); color: #00F2FE; border: 1px solid #00F2FE; padding: 4px 14px; border-radius: 20px; font-size: 11px; font-weight: 800; letter-spacing: 1px;">
+                        👋 {greeting.upper()}, {user_name.upper()}
                     </span>
-                    <span style="background: rgba(0, 242, 254, 0.15); color: #00F2FE; border: 1px solid rgba(0, 242, 254, 0.4); padding: 4px 14px; border-radius: 20px; font-size: 11px; font-weight: 800; letter-spacing: 1px;">
-                        TRANSFER LEARNING ENGINE ACTIVE
+                    <span style="background: rgba(34, 197, 94, 0.15); color: #22C55E; border: 1px solid rgba(34, 197, 94, 0.4); padding: 4px 14px; border-radius: 20px; font-size: 11px; font-weight: 800; letter-spacing: 1px;">
+                        CLEARANCE LEVEL 5 ACTIVE
                     </span>
                 </div>
                 <h1 style="font-size: 34px; font-weight: 900; background: linear-gradient(90deg, #00F2FE 0%, #38BDF8 50%, #818CF8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0; letter-spacing: -0.5px;">
                     Cyber Command Center
                 </h1>
                 <p style="color: #94A3B8; font-size: 14px; margin-top: 6px; font-weight: 500;">
-                    Real-time Forensic Intelligence & Multi-Modal Deepfake Defense Infrastructure
+                    Welcome back to TrustShield AI — Real-time Forensic Intelligence & Deepfake Defense Platform
                 </p>
             </div>
             <div style="text-align: right;">
@@ -58,6 +72,7 @@ def render_home_dashboard():
         </div>
     </div>
     """, unsafe_allow_html=True)
+
     
     # 2. Key KPI Metric Cards
     k1, k2, k3, k4 = st.columns(4)
