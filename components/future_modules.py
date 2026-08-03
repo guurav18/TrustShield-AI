@@ -65,13 +65,36 @@ def render_future_modules():
         </div>
         """, unsafe_allow_html=True)
         
-    with col_m6:
+    col_m7, col_m8, col_m9 = st.columns(3)
+    
+    with col_m7:
         st.markdown("""
         <div class="glass-panel" style="text-align: center;">
-            <div style="font-size: 36px;">🎙️</div>
-            <h3 style="color: #00F2FE; margin-top: 8px;">Voice Cloning & Audio Deepfake Shield</h3>
-            <p style="font-size: 12px; color: #94A3B8;">Mel-Spectrogram AI audio analyzer for ElevenLabs, Bark, and synthetic voiceover spoof detection.</p>
-            <div style="background: rgba(0, 242, 254, 0.15); color: #00F2FE; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: bold; display: inline-block;">FEATURE ARCHITECTURE READY</div>
+            <div style="font-size: 36px;">💬</div>
+            <h3 style="color: #22C55E; margin-top: 8px;">NLP Phishing & SMS Scam Detector</h3>
+            <p style="font-size: 12px; color: #94A3B8;">Copy-paste suspicious WhatsApp / SMS text or links. NLP LLM engine flags fake lottery, bank scams & malicious URLs with reasoning.</p>
+            <div style="background: rgba(34, 197, 94, 0.15); color: #22C55E; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: bold; display: inline-block;">NLP MODULE ARCHITECTURE READY</div>
         </div>
         """, unsafe_allow_html=True)
+
+    with col_m8:
+        st.markdown("""
+        <div class="glass-panel" style="text-align: center;">
+            <div style="font-size: 36px;">🩸</div>
+            <h3 style="color: #EF4444; margin-top: 8px;">rPPG Biological Pulse Analyzer</h3>
+            <p style="font-size: 12px; color: #94A3B8;">Extracts human heartbeat blood-flow pulses ($BPM$) from facial skin color variations. AI deepfakes fail biological heart tests.</p>
+            <div style="background: rgba(239, 68, 68, 0.15); color: #EF4444; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: bold; display: inline-block;">PLANNED V4.0</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col_m9:
+        st.markdown("""
+        <div class="glass-panel" style="text-align: center;">
+            <div style="font-size: 36px;">🌐</div>
+            <h3 style="color: #00F2FE; margin-top: 8px;">REST API & Chrome Extension</h3>
+            <p style="font-size: 12px; color: #94A3B8;">Developer REST API (`POST /v3/analyze`) & Chrome Extension for right-click inline web page video scanning.</p>
+            <div style="background: rgba(0, 242, 254, 0.15); color: #00F2FE; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: bold; display: inline-block;">ENTERPRISE API ACTIVE</div>
+        </div>
+        """, unsafe_allow_html=True)
+
 
