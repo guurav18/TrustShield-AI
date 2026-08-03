@@ -25,22 +25,27 @@ def render_sidebar() -> str:
     """Render sidebar navigation and return selected menu view."""
     with st.sidebar:
         # App Branding Banner Card with Custom 3D Logo
+        logo_html = f'<div style="font-size: 24px;">{SHIELD}</div>'
         if os.path.exists("assets/logo.png"):
-            st.image("assets/logo.png", width=180)
+            import base64
+            with open("assets/logo.png", "rb") as img_file:
+                encoded_img = base64.b64encode(img_file.read()).decode()
+            logo_html = f'<img src="data:image/png;base64,{encoded_img}" style="width: 44px; height: 44px; border-radius: 12px; border: 1.5px solid #00F2FE; box-shadow: 0 0 15px rgba(0, 242, 254, 0.4); object-fit: cover;">'
 
         st.markdown(f"""
         <div style="
             background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.85) 100%);
             border: 1px solid rgba(0, 242, 254, 0.35);
             border-radius: 16px;
-            padding: 14px 18px;
+            padding: 14px 16px;
             margin-bottom: 20px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.1);
         ">
-            <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+                {logo_html}
                 <div>
-                    <div style="font-size: 20px; font-weight: 900; background: linear-gradient(90deg, #00F2FE, #38BDF8, #818CF8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.4px;">TrustShield AI</div>
-                    <div style="display: flex; align-items: center; gap: 6px; margin-top: 3px;">
+                    <div style="font-size: 19px; font-weight: 900; background: linear-gradient(90deg, #00F2FE, #38BDF8, #818CF8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.4px;">TrustShield AI</div>
+                    <div style="display: flex; align-items: center; gap: 6px; margin-top: 2px;">
                         <span class="pulse-dot"></span>
                         <span style="font-size: 10px; color: #00F2FE; font-weight: 800; letter-spacing: 0.8px;">ENTERPRISE v3.4</span>
                     </div>
@@ -48,6 +53,7 @@ def render_sidebar() -> str:
             </div>
         </div>
         """, unsafe_allow_html=True)
+
 
 
         st.markdown("<div style='margin-bottom: 8px;'></div>", unsafe_allow_html=True)
