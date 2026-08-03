@@ -137,89 +137,33 @@ def render_audio_shield():
 
     st.markdown("<div style='margin-bottom: 32px;'></div>", unsafe_allow_html=True)
 
-    # 4. Interactive Audio Simulator
-    st.subheader("🎙️ Interactive Audio Spectrogram Simulator")
-    st.caption("Select a sample audio scenario below to preview how TrustShield AI analyzes acoustic spectrograms for voice cloning artifacts.")
+    # 4. Coming Soon Status Card
+    st.markdown("""
+    <div style="
+        background: rgba(15, 23, 42, 0.95);
+        border: 2px solid rgba(168, 85, 247, 0.4);
+        border-top: 5px solid #A855F7;
+        border-radius: 20px;
+        padding: 32px 40px;
+        text-align: center;
+        margin-top: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    ">
+        <div style="font-size: 42px; margin-bottom: 10px;">🔒</div>
+        <h3 style="color: #C084FC; font-size: 22px; font-weight: 900; margin: 0;">
+            AUDIO SIMULATOR MODULE CURRENTLY OFF
+        </h3>
+        <p style="color: #CBD5E1; font-size: 14px; margin-top: 8px; font-weight: 500;">
+            The interactive Audio & Voice Deepfake Simulator is currently undergoing calibration and will be officially unlocked in <b>TrustShield AI v4.0</b>.
+        </p>
+        <div style="margin-top: 16px;">
+            <span style="background: rgba(168, 85, 247, 0.2); color: #C084FC; border: 1px solid #A855F7; padding: 6px 18px; border-radius: 20px; font-size: 12px; font-weight: 900; letter-spacing: 1px;">
+                STATUS: IN ACTIVE LAB DEVELOPMENT
+            </span>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
-    sample_choice = st.selectbox(
-        "Choose an Audio Sample Scenario to Analyze:",
-        options=[
-            "Sample 1: Real Human Voice Recording (Natural Pitch Vibrations)",
-            "Sample 2: ElevenLabs AI Voice Clone (Synthetic Pitch Grid Artifacts)",
-            "Sample 3: WhatsApp Emergency Audio Scam (Voice Clone + Background Noise Spoof)"
-        ],
-        index=0
-    )
-
-    if st.button("⚡ Run Forensic Audio Analysis", key="btn_run_audio_sim", use_container_width=True):
-        st.markdown("<div style='margin-top: 16px;'></div>", unsafe_allow_html=True)
-        
-        # Generate simulated Mel-Spectrogram matrix based on sample
-        np.random.seed(42 if "Real" in sample_choice else 99)
-        time_bins = np.linspace(0, 10, 100)
-        freq_bins = np.linspace(0, 8000, 60)
-        
-        if "Real" in sample_choice:
-            spectrogram_data = np.random.normal(loc=0.5, scale=0.2, size=(60, 100)) + np.sin(np.outer(freq_bins, time_bins) / 1000)
-            voice_authenticity = 94.8
-            is_cloned = False
-            risk_label = "SAFE (HUMAN VOICE)"
-            badge_color = "#22C55E"
-            detected_model = "None (Authentic Human Micro-pitch Variance)"
-        elif "ElevenLabs" in sample_choice:
-            spectrogram_data = np.random.normal(loc=0.8, scale=0.05, size=(60, 100)) + 0.5 * np.outer(freq_bins, time_bins) % 2
-            voice_authenticity = 12.4
-            is_cloned = True
-            risk_label = "HIGH RISK (SYNTHETIC VOICE CLONE)"
-            badge_color = "#EF4444"
-            detected_model = "ElevenLabs Neural Voice Engine (v2.5)"
-        else:
-            spectrogram_data = np.random.normal(loc=0.7, scale=0.1, size=(60, 100))
-            voice_authenticity = 24.1
-            is_cloned = True
-            risk_label = "CRITICAL (WHATSAPP SCAM CLONE)"
-            badge_color = "#EF4444"
-            detected_model = "Bark / Tortoise-TTS Generative Model"
-
-        res_col1, res_col2 = st.columns([1.5, 1])
-
-        with res_col1:
-            st.markdown("#### 🌊 Acoustic Mel-Spectrogram Frequency Analysis")
-            
-            fig_spec = go.Figure(data=go.Heatmap(
-                z=spectrogram_data,
-                x=time_bins,
-                y=freq_bins,
-                colorscale='Viridis' if not is_cloned else 'Inferno'
-            ))
-            
-            fig_spec.update_layout(
-                xaxis_title="Time (seconds)",
-                yaxis_title="Frequency (Hz)",
-                paper_bgcolor='rgba(0,0,0,0)',
-                plot_bgcolor='rgba(0,0,0,0)',
-                height=280,
-                margin=dict(l=20, r=20, t=20, b=20),
-                xaxis=dict(gridcolor='#1E293B', color='#94A3B8'),
-                yaxis=dict(gridcolor='#1E293B', color='#94A3B8')
-            )
-            st.plotly_chart(fig_spec, use_container_width=True)
-
-        with res_col2:
-            st.markdown("#### 📊 Voice Forensic Result")
-            st.markdown(f"""
-            <div style="background: rgba(15, 23, 42, 0.95); border: 2px solid {badge_color}; border-radius: 16px; padding: 22px; text-align: center;">
-                <div style="font-size: 11px; font-weight: 900; color: #94A3B8; text-transform: uppercase;">VOICE AUTHENTICITY SCORE</div>
-                <div style="font-size: 42px; font-weight: 900; color: {badge_color}; margin-top: 4px;">{voice_authenticity}%</div>
-                <div style="background: {badge_color}22; color: {badge_color}; border: 1px solid {badge_color}; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 900; margin-top: 8px; display: inline-block;">
-                    {risk_label}
-                </div>
-                <div style="margin-top: 16px; font-size: 12px; color: #CBD5E1; text-align: left;">
-                    <div>• <b>Acoustic Model Signature:</b> <br><span style="color: #00F2FE;">{detected_model}</span></div>
-                    <div style="margin-top: 8px;">• <b>Pitch Cadence Variance:</b> <br><span style="color: #F8FAFC;">{"Natural Human Variance" if not is_cloned else "Synthetic Flat Pitch (Grid Defect)"}</span></div>
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
 
     st.markdown("---")
 
