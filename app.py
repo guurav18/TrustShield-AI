@@ -91,9 +91,7 @@ elif view_choice == f"{GRAD} Awareness & Privacy Hub":
 
 
 
-elif view_choice == f"{CAM} Live Camera":
-    st.markdown(f"## {CAM} Live Camera Shield Simulator")
-    render_future_modules()
+
 elif view_choice == f"{BRAIN} Threat Intelligence":
     render_threat_intelligence()
 elif view_choice == f"{TREND} Analytics & Trends":

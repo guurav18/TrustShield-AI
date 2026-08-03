@@ -79,12 +79,12 @@ def render_sidebar() -> str:
                 f"{POLICE} Cyber Cell & Police Unit",
                 f"{MIC} Audio & Voice Shield",
                 f"{GRAD} Awareness & Privacy Hub",
-                f"{CAM} Live Camera",
                 f"{BRAIN} Threat Intelligence",
                 f"{TREND} Analytics & Trends",
                 f"{SCROLL} Reports & Certificates",
                 f"{BOLT} Future Modules",
                 f"{GEAR} Settings & Telemetry"
+
             ],
             index=0
         )
