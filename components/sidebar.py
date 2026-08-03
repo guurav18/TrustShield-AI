@@ -51,10 +51,24 @@ def render_sidebar() -> str:
                         <span class="pulse-dot"></span>
                         <span style="font-size: 10px; color: #00F2FE; font-weight: 800; letter-spacing: 0.8px;">ENTERPRISE v3.4</span>
                     </div>
-                </div>
-            </div>
+        </div>
         </div>
         """, unsafe_allow_html=True)
+
+        # Live System Date & Time Widget
+        import datetime
+        now = datetime.datetime.now()
+        date_str = now.strftime("%a, %d %b %Y")
+        time_str = now.strftime("%I:%M %p")
+
+        st.markdown(f"""
+        <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(0, 242, 254, 0.3); border-radius: 12px; padding: 8px 14px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);">
+            <div style="font-size: 11px; color: #38BDF8; font-weight: 800;">📅 {date_str}</div>
+            <div style="font-size: 11px; color: #00F2FE; font-weight: 900;">🕒 {time_str}</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+
 
 
 

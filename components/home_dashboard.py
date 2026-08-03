@@ -25,8 +25,9 @@ import datetime
 def render_home_dashboard():
     """Render Executive Command Center Home Dashboard."""
     
-    # Calculate time of day greeting
-    current_hour = datetime.datetime.now().hour
+    # Calculate time of day greeting & live clock string
+    now = datetime.datetime.now()
+    current_hour = now.hour
     if current_hour < 12:
         greeting = "Good Morning"
     elif current_hour < 17:
@@ -34,9 +35,10 @@ def render_home_dashboard():
     else:
         greeting = "Good Evening"
         
+    full_date_str = now.strftime("%d %b %Y | %I:%M %p")
     user_name = st.session_state.get("user_name", "Security Officer")
     
-    # 1. Executive Banner with Dynamic Welcome Greeting
+    # 1. Executive Banner with Dynamic Welcome Greeting & Live Clock
     st.markdown(f"""
     <div style="
         background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.9) 50%, rgba(30, 27, 75, 0.95) 100%);
@@ -67,11 +69,12 @@ def render_home_dashboard():
             <div style="text-align: right;">
                 <div style="font-size: 11px; color: #64748B; font-weight: bold; text-transform: uppercase;">GLOBAL DEFENSE STATUS</div>
                 <div style="font-size: 22px; font-weight: 900; color: #22C55E; margin-top: 2px;">DEFCON 1 — OPTIMAL</div>
-                <div style="font-size: 12px; color: #94A3B8;">OpenCV Face Detector + MobileNetV2 Neural Shield</div>
+                <div style="font-size: 12px; color: #00F2FE; font-weight: bold; margin-top: 4px;">🕒 {full_date_str}</div>
             </div>
         </div>
     </div>
     """, unsafe_allow_html=True)
+
 
     
     # 2. Key KPI Metric Cards
