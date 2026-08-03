@@ -19,6 +19,7 @@ PC     = "💻"
 CAM    = "🎥"
 GRAD   = "🎓"
 MIC    = "🎙️"
+POLICE = "🚓"
 
 
 def render_sidebar() -> str:
@@ -74,6 +75,7 @@ def render_sidebar() -> str:
                 f"{CHART} Home Dashboard",
                 f"{MICRO} Video Inspector",
                 f"{BOX} Batch Analysis",
+                f"{POLICE} Cyber Cell & Police Unit",
                 f"{MIC} Audio & Voice Shield",
                 f"{GRAD} Awareness & Privacy Hub",
                 f"{CAM} Live Camera",
@@ -85,6 +87,7 @@ def render_sidebar() -> str:
             ],
             index=0
         )
+
 
 
 
