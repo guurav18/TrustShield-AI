@@ -76,17 +76,17 @@ def render_home_dashboard():
         </div>
     </div>
     <script>
-    function tickDashClock() {
+    function tickDashClock() {{
         const now = new Date();
-        const str = now.toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' }) + ' | ' + now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+        const str = now.toLocaleDateString('en-US', {{ day: '2-digit', month: 'short', year: 'numeric' }}) + ' | ' + now.toLocaleTimeString('en-US', {{ hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true }});
         const el = document.getElementById('dash-live-clock');
         if (el) el.innerText = str;
-    }
+    }}
     setInterval(tickDashClock, 1000);
     tickDashClock();
     </script>
-
     """, unsafe_allow_html=True)
+
 
 
     
