@@ -3,6 +3,7 @@ TrustShield AI - Left Sidebar Navigation Component
 Handles section navigation, system telemetry (GPU, RAM, CUDA), and forensic sensitivity controls.
 """
 
+import os
 import streamlit as st
 
 SHIELD = "🛡️"
@@ -77,6 +78,24 @@ def render_sidebar() -> str:
             ],
             index=0
         )
+
+        # Developer Profile Card
+        st.markdown("<hr style='border-color: rgba(255,255,255,0.08); margin: 18px 0;'>", unsafe_allow_html=True)
+        st.markdown(f"<div style='font-size: 11px; font-weight: 800; color: #00F2FE; letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 10px;'>👨‍💻 LEAD ARCHITECT & DEVELOPER</div>", unsafe_allow_html=True)
+
+        if os.path.exists("assets/gaurav.jpg"):
+            st.image("assets/gaurav.jpg", use_container_width=True)
+
+        st.markdown("""
+        <div style="background: rgba(15, 23, 42, 0.85); padding: 14px; border-radius: 14px; text-align: center; border: 1px solid rgba(0, 242, 254, 0.35); margin-top: 6px; box-shadow: 0 4px 15px rgba(0, 242, 254, 0.15);">
+            <div style="font-size: 17px; font-weight: 900; color: #F8FAFC;">Gaurav Gupta</div>
+            <div style="font-size: 11px; color: #00F2FE; font-weight: 800; margin-top: 2px;">AI & Cyber Security Researcher</div>
+            <div style="font-size: 10px; color: #94A3B8; margin-top: 6px; line-height: 1.4;">
+                Creator & Lead Engineer of <b>TrustShield AI</b> — Multi-Modal Deepfake Defense Platform.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
 
 
 
