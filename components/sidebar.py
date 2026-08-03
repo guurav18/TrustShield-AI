@@ -17,6 +17,7 @@ GEAR   = "⚙️"
 PC     = "💻"
 CAM    = "🎥"
 GRAD   = "🎓"
+MIC    = "🎙️"
 
 
 def render_sidebar() -> str:
@@ -65,6 +66,7 @@ def render_sidebar() -> str:
                 f"{CHART} Home Dashboard",
                 f"{MICRO} Video Inspector",
                 f"{BOX} Batch Analysis",
+                f"{MIC} Audio & Voice Shield",
                 f"{GRAD} Awareness & Privacy Hub",
                 f"{CAM} Live Camera",
                 f"{BRAIN} Threat Intelligence",
@@ -75,6 +77,7 @@ def render_sidebar() -> str:
             ],
             index=0
         )
+
 
 
         st.markdown("<hr style='border-color: rgba(255,255,255,0.08); margin: 18px 0;'>", unsafe_allow_html=True)

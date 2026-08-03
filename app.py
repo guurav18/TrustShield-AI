@@ -24,6 +24,7 @@ HEART   = "\u2764\uFE0F"       # ❤️
 CAM     = "\U0001F3A5"         # 🎥
 CHECK   = "\u2705"             # ✅
 GRAD    = "\U0001F393"         # 🎓
+MIC     = "\U0001F399\uFE0F"   # 🎙️
 
 # Page configuration
 st.set_page_config(
@@ -61,6 +62,7 @@ from components.hero import render_hero
 from components.home_dashboard import render_home_dashboard
 from components.single_inspector import render_single_inspector
 from components.batch_analysis import render_batch_analysis
+from components.audio_shield import render_audio_shield
 from components.cyber_awareness import render_cyber_awareness
 from components.analytics_dashboard import render_analytics_dashboard
 from components.threat_intelligence import render_threat_intelligence
@@ -78,8 +80,11 @@ elif view_choice == f"{MICRO} Video Inspector":
     render_single_inspector(detector)
 elif view_choice == f"{BOX} Batch Analysis":
     render_batch_analysis(detector)
+elif view_choice == f"{MIC} Audio & Voice Shield":
+    render_audio_shield()
 elif view_choice == f"{GRAD} Awareness & Privacy Hub":
     render_cyber_awareness()
+
 
 elif view_choice == f"{CAM} Live Camera":
     st.markdown(f"## {CAM} Live Camera Shield Simulator")
