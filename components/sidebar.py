@@ -24,39 +24,31 @@ MIC    = "🎙️"
 def render_sidebar() -> str:
     """Render sidebar navigation and return selected menu view."""
     with st.sidebar:
-        # App Branding Banner Card
+        # App Branding Banner Card with Custom 3D Logo
+        if os.path.exists("assets/logo.png"):
+            st.image("assets/logo.png", width=180)
+
         st.markdown(f"""
         <div style="
             background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.85) 100%);
-            border: 1px solid rgba(56, 189, 248, 0.25);
+            border: 1px solid rgba(0, 242, 254, 0.35);
             border-radius: 16px;
-            padding: 16px 18px;
+            padding: 14px 18px;
             margin-bottom: 20px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.1);
         ">
-            <div style="display: flex; align-items: center; gap: 14px;">
-                <div style="
-                    font-size: 26px;
-                    width: 48px;
-                    height: 48px;
-                    background: linear-gradient(135deg, rgba(0, 242, 254, 0.2), rgba(129, 140, 248, 0.2));
-                    border: 1px solid rgba(0, 242, 254, 0.4);
-                    border-radius: 12px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    box-shadow: 0 0 18px rgba(0, 242, 254, 0.25);
-                ">{SHIELD}</div>
+            <div style="display: flex; align-items: center; justify-content: space-between;">
                 <div>
-                    <div style="font-size: 19px; font-weight: 900; background: linear-gradient(90deg, #00F2FE, #38BDF8, #818CF8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.4px;">TrustShield AI</div>
+                    <div style="font-size: 20px; font-weight: 900; background: linear-gradient(90deg, #00F2FE, #38BDF8, #818CF8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.4px;">TrustShield AI</div>
                     <div style="display: flex; align-items: center; gap: 6px; margin-top: 3px;">
                         <span class="pulse-dot"></span>
-                        <span style="font-size: 10px; color: #38BDF8; font-weight: 800; letter-spacing: 0.8px;">ENTERPRISE v3.4</span>
+                        <span style="font-size: 10px; color: #00F2FE; font-weight: 800; letter-spacing: 0.8px;">ENTERPRISE v3.4</span>
                     </div>
                 </div>
             </div>
         </div>
         """, unsafe_allow_html=True)
+
 
         st.markdown("<div style='margin-bottom: 8px;'></div>", unsafe_allow_html=True)
 
