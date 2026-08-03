@@ -55,28 +55,20 @@ def render_sidebar() -> str:
         </div>
         """, unsafe_allow_html=True)
 
-        # Real-time JS Live Ticking Clock Widget
-        st.markdown("""
-        <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(0, 242, 254, 0.35); border-radius: 12px; padding: 10px 14px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(0, 242, 254, 0.15);">
-            <div id="sb-live-date" style="font-size: 11px; color: #38BDF8; font-weight: 800;">📅 Loading...</div>
-            <div id="sb-live-time" style="font-size: 11px; color: #00F2FE; font-weight: 900;">🕒 Loading...</div>
-        </div>
+        # Real-time System Date & Time Widget (IST)
+        import datetime
+        utc_now = datetime.datetime.now(datetime.timezone.utc)
+        ist_now = utc_now + datetime.timedelta(hours=5, minutes=30)
+        date_str = ist_now.strftime("%a, %d %b %Y")
+        time_str = ist_now.strftime("%I:%M %p")
 
-        <script>
-        function tickSidebarClock() {
-            const now = new Date();
-            const dStr = '📅 ' + now.toLocaleDateString('en-US', { weekday: 'short', day: '2-digit', month: 'short', year: 'numeric' });
-            const tStr = '🕒 ' + now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
-            
-            const dEl = document.getElementById('sb-live-date');
-            const tEl = document.getElementById('sb-live-time');
-            if (dEl) dEl.innerText = dStr;
-            if (tEl) tEl.innerText = tStr;
-        }
-        setInterval(tickSidebarClock, 1000);
-        tickSidebarClock();
-        </script>
+        st.markdown(f"""
+        <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(0, 242, 254, 0.35); border-radius: 12px; padding: 10px 14px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(0, 242, 254, 0.15);">
+            <div style="font-size: 11px; color: #38BDF8; font-weight: 800;">📅 {date_str}</div>
+            <div style="font-size: 11px; color: #00F2FE; font-weight: 900;">🕒 {time_str} IST</div>
+        </div>
         """, unsafe_allow_html=True)
+
 
 
 

@@ -25,9 +25,10 @@ import datetime
 def render_home_dashboard():
     """Render Executive Command Center Home Dashboard."""
     
-    # Calculate time of day greeting & live clock string
-    now = datetime.datetime.now()
-    current_hour = now.hour
+    # Calculate time of day greeting & live IST clock string
+    utc_now = datetime.datetime.now(datetime.timezone.utc)
+    ist_now = utc_now + datetime.timedelta(hours=5, minutes=30)
+    current_hour = ist_now.hour
     if current_hour < 12:
         greeting = "Good Morning"
     elif current_hour < 17:
@@ -35,10 +36,10 @@ def render_home_dashboard():
     else:
         greeting = "Good Evening"
         
-    full_date_str = now.strftime("%d %b %Y | %I:%M %p")
+    full_date_str = ist_now.strftime("%d %b %Y | %I:%M %p IST")
     user_name = st.session_state.get("user_name", "Security Officer")
     
-    # 1. Executive Banner with Dynamic Welcome Greeting & Live Clock
+    # 1. Executive Banner with Dynamic Welcome Greeting & System Clock
     st.markdown(f"""
     <div style="
         background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.9) 50%, rgba(30, 27, 75, 0.95) 100%);
@@ -69,23 +70,12 @@ def render_home_dashboard():
             <div style="text-align: right;">
                 <div style="font-size: 11px; color: #64748B; font-weight: bold; text-transform: uppercase;">GLOBAL DEFENSE STATUS</div>
                 <div style="font-size: 22px; font-weight: 900; color: #22C55E; margin-top: 2px;">DEFCON 1 — OPTIMAL</div>
-                <div style="font-size: 12px; color: #00F2FE; font-weight: bold; margin-top: 4px;">
-                    🕒 <span id="dash-live-clock">Loading...</span>
-                </div>
+                <div style="font-size: 12px; color: #00F2FE; font-weight: bold; margin-top: 4px;">🕒 {full_date_str}</div>
             </div>
         </div>
     </div>
-    <script>
-    function tickDashClock() {{
-        const now = new Date();
-        const str = now.toLocaleDateString('en-US', {{ day: '2-digit', month: 'short', year: 'numeric' }}) + ' | ' + now.toLocaleTimeString('en-US', {{ hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true }});
-        const el = document.getElementById('dash-live-clock');
-        if (el) el.innerText = str;
-    }}
-    setInterval(tickDashClock, 1000);
-    tickDashClock();
-    </script>
     """, unsafe_allow_html=True)
+
 
 
 
