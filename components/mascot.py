@@ -53,13 +53,14 @@ def render_mascot_widget():
         ">🤖</div>
         <div>
             <div style="display: flex; align-items: center; gap: 8px;">
-                <span style="font-size: 11px; font-weight: 900; color: #00F2FE; letter-spacing: 1px;">SHIELD BOT AI</span>
+                <span style="font-size: 11px; font-weight: 900; color: #00F2FE; letter-spacing: 1px;">SHIELD</span>
                 <span style="background: rgba(34, 197, 94, 0.2); color: #22C55E; border: 1px solid #22C55E; padding: 2px 8px; border-radius: 10px; font-size: 9px; font-weight: 900;">ONLINE</span>
             </div>
             <div style="font-size: 13px; color: #F8FAFC; margin-top: 5px; font-weight: 500; line-height: 1.45;">
-                👋 <b>Hello! I'm TrustShield AI Bot!</b><br>
+                👋 <b>Hello! I'm TrustShield!</b><br>
                 Welcome! I'm scanning all media for AI deepfakes and face swaps in real-time. Stay safe!
             </div>
+
         </div>
     </div>
 
